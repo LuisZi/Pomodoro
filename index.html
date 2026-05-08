@@ -1,65 +1,64 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-.wrap { padding: 2rem 1rem 3rem; max-width: 520px; margin: 0 auto; font-family: var(--font-sans); }
+body { background: #191919; color: #e8e8e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.wrap { padding: 2rem 1rem 3rem; max-width: 520px; margin: 0 auto; text-align: center; }
 .tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 2rem; }
-.tab { padding: 6px 18px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); font-size: 13px; cursor: pointer; background: transparent; color: var(--color-text-secondary); transition: all .15s; }
-.tab.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: transparent; }
+.tab { padding: 6px 18px; border-radius: 20px; border: 0.5px solid #444; font-size: 13px; cursor: pointer; background: transparent; color: #888; transition: all .15s; }
+.tab.active { background: #e8e8e6; color: #191919; border-color: transparent; }
 .timer-circle { position: relative; width: 220px; height: 220px; margin: 0 auto 2rem; }
 .timer-circle svg { width: 220px; height: 220px; transform: rotate(-90deg); }
-.ring-bg { fill: none; stroke: var(--color-border-tertiary); stroke-width: 8; }
+.ring-bg { fill: none; stroke: #333; stroke-width: 8; }
 .ring-progress { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .5s linear, stroke .3s; }
 .timer-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
-.time-display { font-size: 42px; font-weight: 500; color: var(--color-text-primary); letter-spacing: -1px; line-height: 1; }
-.session-label { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; }
+.time-display { font-size: 42px; font-weight: 500; color: #e8e8e6; letter-spacing: -1px; line-height: 1; }
+.session-label { font-size: 12px; color: #888; margin-top: 4px; }
 .controls { display: flex; gap: 12px; justify-content: center; align-items: center; margin-bottom: 1.5rem; }
-.btn-main { padding: 10px 36px; border-radius: 24px; border: 0.5px solid var(--color-border-primary); font-size: 15px; font-weight: 500; cursor: pointer; background: var(--color-text-primary); color: var(--color-background-primary); transition: opacity .15s; }
+.btn-main { padding: 10px 36px; border-radius: 24px; border: 0.5px solid #555; font-size: 15px; font-weight: 500; cursor: pointer; background: #e8e8e6; color: #191919; transition: opacity .15s; }
 .btn-main:hover { opacity: .8; }
-.btn-icon { width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid var(--color-border-secondary); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--color-text-secondary); transition: background .15s; }
-.btn-icon:hover { background: var(--color-background-secondary); }
+.btn-icon { width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid #444; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #888; transition: background .15s; }
+.btn-icon:hover { background: #2a2a2a; }
 .dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 1.5rem; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-border-secondary); transition: background .3s; }
-.dot.done { background: var(--color-text-primary); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #444; transition: background .3s; }
+.dot.done { background: #e8e8e6; }
 .stats { display: flex; gap: 12px; justify-content: center; margin-bottom: 2.5rem; }
-.stat-card { flex: 1; max-width: 120px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; text-align: center; }
-.stat-num { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.stat-lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
-.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
-.todo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.todo-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: .05em; text-transform: uppercase; }
-.todo-clear { font-size: 12px; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; padding: 4px 8px; border-radius: var(--border-radius-md); transition: background .15s; }
-.todo-clear:hover { background: var(--color-background-secondary); }
-.todo-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
-.todo-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); transition: border-color .15s; }
-.todo-item:hover { border-color: var(--color-border-secondary); }
-.todo-item.active-task { border-color: var(--color-border-primary); }
-.todo-cb { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-border-primary); cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; background: transparent; }
-.todo-cb.checked { background: var(--color-text-primary); border-color: var(--color-text-primary); }
-.todo-cb.checked::after { content: ''; width: 5px; height: 9px; border: 1.5px solid var(--color-background-primary); border-top: none; border-left: none; transform: rotate(45deg) translateY(-1px); display: block; }
-.todo-text { flex: 1; font-size: 14px; color: var(--color-text-primary); cursor: pointer; text-align: left; background: none; border: none; font-family: var(--font-sans); }
-.todo-text.done { text-decoration: line-through; color: var(--color-text-secondary); }
-.todo-est { display: flex; align-items: center; gap: 4px; }
-.pom-count { font-size: 12px; color: var(--color-text-secondary); }
-.pom-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-border-secondary); }
-.pom-dot.filled { background: var(--color-text-secondary); }
-.todo-del { background: none; border: none; cursor: pointer; color: var(--color-text-secondary); opacity: 0; transition: opacity .15s; padding: 2px 4px; border-radius: 4px; display: flex; align-items: center; }
+.stat-card { flex: 1; max-width: 120px; background: #242424; border-radius: 8px; padding: 10px 12px; }
+.stat-num { font-size: 20px; font-weight: 500; color: #e8e8e6; }
+.stat-lbl { font-size: 11px; color: #888; margin-top: 2px; }
+.divider { border: none; border-top: 0.5px solid #333; margin-bottom: 1.5rem; }
+.todo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; text-align: left; }
+.todo-title { font-size: 13px; font-weight: 500; color: #888; letter-spacing: .05em; text-transform: uppercase; }
+.todo-clear { font-size: 12px; color: #888; background: none; border: none; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: background .15s; }
+.todo-clear:hover { background: #2a2a2a; }
+.todo-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; text-align: left; }
+.todo-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; border: 0.5px solid #333; background: #222; transition: border-color .15s; }
+.todo-item:hover { border-color: #555; }
+.todo-item.active-task { border-color: #666; }
+.todo-cb { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #555; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; background: transparent; }
+.todo-cb.checked { background: #e8e8e6; border-color: #e8e8e6; }
+.todo-cb.checked::after { content: ''; width: 5px; height: 9px; border: 1.5px solid #191919; border-top: none; border-left: none; transform: rotate(45deg) translateY(-1px); display: block; }
+.todo-text { flex: 1; font-size: 14px; color: #e8e8e6; cursor: pointer; text-align: left; background: none; border: none; font-family: inherit; }
+.todo-text.done { text-decoration: line-through; color: #555; }
+.todo-est { display: flex; align-items: center; gap: 3px; }
+.pom-dot { width: 7px; height: 7px; border-radius: 50%; background: #444; }
+.pom-dot.filled { background: #888; }
+.todo-del { background: none; border: none; cursor: pointer; color: #666; opacity: 0; transition: opacity .15s; padding: 2px 4px; border-radius: 4px; display: flex; align-items: center; }
 .todo-item:hover .todo-del { opacity: 1; }
 .todo-add-row { display: flex; gap: 8px; }
-.todo-input { flex: 1; padding: 9px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); font-size: 14px; font-family: var(--font-sans); background: var(--color-background-primary); color: var(--color-text-primary); }
-.todo-input:focus { outline: none; border-color: var(--color-border-primary); }
-.btn-add { padding: 9px 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; font-size: 14px; cursor: pointer; color: var(--color-text-secondary); white-space: nowrap; transition: background .15s; }
-.btn-add:hover { background: var(--color-background-secondary); }
-.active-task-bar { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 14px; margin-bottom: 1.5rem; font-size: 13px; color: var(--color-text-secondary); text-align: center; min-height: 34px; }
-.active-task-bar span { color: var(--color-text-primary); font-weight: 500; }
+.todo-input { flex: 1; padding: 9px 12px; border-radius: 8px; border: 0.5px solid #444; font-size: 14px; font-family: inherit; background: #222; color: #e8e8e6; }
+.todo-input:focus { outline: none; border-color: #666; }
+.todo-input::placeholder { color: #555; }
+.btn-add { padding: 9px 16px; border-radius: 8px; border: 0.5px solid #444; background: transparent; font-size: 14px; cursor: pointer; color: #888; white-space: nowrap; transition: background .15s; font-family: inherit; }
+.btn-add:hover { background: #2a2a2a; }
+.active-task-bar { background: #242424; border-radius: 8px; padding: 8px 14px; margin-bottom: 1.5rem; font-size: 13px; color: #888; text-align: center; min-height: 34px; }
+.active-task-bar span { color: #e8e8e6; font-weight: 500; }
 </style>
-<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">Pomodoro Timer mit Aufgabenliste</h2>
 <div class="wrap">
   <div class="tabs">
     <button class="tab active" onclick="setMode('pomodoro')">Pomodoro</button>
     <button class="tab" onclick="setMode('short')">Kurze Pause</button>
     <button class="tab" onclick="setMode('long')">Lange Pause</button>
   </div>
-
   <div class="timer-circle">
     <svg viewBox="0 0 220 220">
       <circle class="ring-bg" cx="110" cy="110" r="100"/>
@@ -70,206 +69,106 @@
       <div class="session-label" id="session-lbl">Fokussieren!</div>
     </div>
   </div>
-
   <div class="controls">
-    <button class="btn-icon" onclick="resetTimer()" aria-label="Zurücksetzen"><i class="ti ti-refresh" style="font-size:16px" aria-hidden="true"></i></button>
+    <button class="btn-icon" onclick="resetTimer()" aria-label="Zurücksetzen">↺</button>
     <button class="btn-main" id="startbtn" onclick="toggleTimer()">Start</button>
-    <button class="btn-icon" onclick="skipSession()" aria-label="Überspringen"><i class="ti ti-player-skip-forward" style="font-size:16px" aria-hidden="true"></i></button>
+    <button class="btn-icon" onclick="skipSession()" aria-label="Überspringen">⏭</button>
   </div>
-
   <div class="dots" id="dots"></div>
-
   <div class="stats">
     <div class="stat-card"><div class="stat-num" id="s-pomodoros">0</div><div class="stat-lbl">Pomodoros</div></div>
     <div class="stat-card"><div class="stat-num" id="s-focus">0m</div><div class="stat-lbl">Fokuszeit</div></div>
     <div class="stat-card"><div class="stat-num" id="s-streak">0</div><div class="stat-lbl">Streak</div></div>
   </div>
-
   <hr class="divider">
-
   <div class="active-task-bar" id="active-bar">Keine Aufgabe ausgewählt</div>
-
   <div class="todo-header">
     <span class="todo-title">Aufgaben</span>
     <button class="todo-clear" onclick="clearDone()">Erledigte löschen</button>
   </div>
-
   <div class="todo-list" id="todo-list"></div>
-
   <div class="todo-add-row">
     <input class="todo-input" id="todo-input" type="text" placeholder="Neue Aufgabe hinzufügen…" onkeydown="if(event.key==='Enter')addTodo()">
-    <button class="btn-add" onclick="addTodo()"><i class="ti ti-plus" style="font-size:15px;vertical-align:-2px" aria-hidden="true"></i> Hinzufügen</button>
+    <button class="btn-add" onclick="addTodo()">+ Hinzufügen</button>
   </div>
 </div>
-
 <script>
 const MODES = {
-  pomodoro: { label: 'Fokussieren!', duration: 50 * 60, color: '#E24B4A' },
-  short:    { label: 'Kurze Pause',  duration: 10 * 60, color: '#1D9E75' },
-  long:     { label: 'Lange Pause',  duration: 20 * 60, color: '#378ADD' }
+  pomodoro: { label: 'Fokussieren!', duration: 50*60, color: '#E24B4A' },
+  short:    { label: 'Kurze Pause',  duration: 10*60, color: '#1D9E75' },
+  long:     { label: 'Lange Pause',  duration: 20*60, color: '#378ADD' }
 };
 const LONG_BREAK_INTERVAL = 4;
-
-let mode = 'pomodoro';
-let remaining = MODES.pomodoro.duration;
-let running = false;
-let ticker = null;
-let totalPomodoros = 0;
-let totalFocusSec = 0;
-let streak = 0;
-let pomInSet = 0;
-let activeTaskId = null;
-
-let todos = [];
-let nextId = 1;
-
-const ring = document.getElementById('ring');
-const display = document.getElementById('display');
-const sessionLbl = document.getElementById('session-lbl');
-const startbtn = document.getElementById('startbtn');
-const circumference = 2 * Math.PI * 100;
+let mode='pomodoro', remaining=MODES.pomodoro.duration, running=false, ticker=null;
+let totalPomodoros=0, totalFocusSec=0, streak=0, pomInSet=0, activeTaskId=null;
+let todos=[], nextId=1;
+const ring=document.getElementById('ring'), display=document.getElementById('display');
+const sessionLbl=document.getElementById('session-lbl'), startbtn=document.getElementById('startbtn');
+const C=2*Math.PI*100;
 
 function setMode(m) {
-  clearInterval(ticker); running = false; mode = m;
-  remaining = MODES[m].duration;
-  startbtn.textContent = 'Start';
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['pomodoro','short','long'][i]===m));
-  sessionLbl.textContent = MODES[m].label;
-  ring.style.stroke = MODES[m].color;
+  clearInterval(ticker); running=false; mode=m; remaining=MODES[m].duration;
+  startbtn.textContent='Start';
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['pomodoro','short','long'][i]===m));
+  sessionLbl.textContent=MODES[m].label; ring.style.stroke=MODES[m].color;
   updateDisplay(); updateRing();
 }
-
 function toggleTimer() {
-  if (running) {
-    clearInterval(ticker); running = false; startbtn.textContent = 'Weiter';
-  } else {
-    running = true; startbtn.textContent = 'Pause';
-    ticker = setInterval(tick, 1000);
-  }
+  if(running){clearInterval(ticker);running=false;startbtn.textContent='Weiter';}
+  else{running=true;startbtn.textContent='Pause';ticker=setInterval(tick,1000);}
 }
-
 function tick() {
-  if (remaining > 0) {
-    remaining--;
-    if (mode === 'pomodoro') totalFocusSec++;
-    updateDisplay(); updateRing();
-  } else {
-    clearInterval(ticker); running = false; onComplete();
-  }
+  if(remaining>0){remaining--;if(mode==='pomodoro')totalFocusSec++;updateDisplay();updateRing();}
+  else{clearInterval(ticker);running=false;onComplete();}
 }
-
 function onComplete() {
-  if (mode === 'pomodoro') {
-    totalPomodoros++; pomInSet++; streak++;
-    if (activeTaskId !== null) {
-      const t = todos.find(t => t.id === activeTaskId);
-      if (t) { t.pomsUsed = (t.pomsUsed||0) + 1; renderTodos(); }
-    }
-    document.getElementById('s-pomodoros').textContent = totalPomodoros;
-    document.getElementById('s-focus').textContent = Math.round(totalFocusSec/60)+'m';
-    document.getElementById('s-streak').textContent = streak;
+  if(mode==='pomodoro'){
+    totalPomodoros++;pomInSet++;streak++;
+    if(activeTaskId!==null){const t=todos.find(t=>t.id===activeTaskId);if(t){t.pomsUsed=(t.pomsUsed||0)+1;renderTodos();}}
+    document.getElementById('s-pomodoros').textContent=totalPomodoros;
+    document.getElementById('s-focus').textContent=Math.round(totalFocusSec/60)+'m';
+    document.getElementById('s-streak').textContent=streak;
     updateDots();
-    if (pomInSet >= LONG_BREAK_INTERVAL) { pomInSet = 0; setMode('long'); }
-    else setMode('short');
-  } else { setMode('pomodoro'); }
-  startbtn.textContent = 'Start';
+    if(pomInSet>=LONG_BREAK_INTERVAL){pomInSet=0;setMode('long');}else setMode('short');
+  } else setMode('pomodoro');
+  startbtn.textContent='Start';
 }
-
-function resetTimer() {
-  clearInterval(ticker); running = false;
-  remaining = MODES[mode].duration;
-  startbtn.textContent = 'Start';
-  updateDisplay(); updateRing();
-}
-
-function skipSession() {
-  clearInterval(ticker); running = false; onComplete();
-}
-
-function updateDisplay() {
-  const m = Math.floor(remaining/60), s = remaining%60;
-  display.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-}
-
-function updateRing() {
-  const frac = remaining / MODES[mode].duration;
-  ring.style.strokeDashoffset = circumference*(1-frac);
-}
-
-function updateDots() {
-  const dots = document.getElementById('dots');
-  dots.innerHTML = '';
-  for (let i=0;i<LONG_BREAK_INTERVAL;i++) {
-    const d = document.createElement('div');
-    d.className='dot'+(i<pomInSet?' done':'');
-    dots.appendChild(d);
-  }
-}
-
-function addTodo() {
-  const inp = document.getElementById('todo-input');
-  const text = inp.value.trim();
-  if (!text) return;
-  todos.push({ id: nextId++, text, done: false, pomsEst: 1, pomsUsed: 0 });
-  inp.value = '';
+function resetTimer(){clearInterval(ticker);running=false;remaining=MODES[mode].duration;startbtn.textContent='Start';updateDisplay();updateRing();}
+function skipSession(){clearInterval(ticker);running=false;onComplete();}
+function updateDisplay(){const m=Math.floor(remaining/60),s=remaining%60;display.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+function updateRing(){ring.style.strokeDashoffset=C*(1-remaining/MODES[mode].duration);}
+function updateDots(){const d=document.getElementById('dots');d.innerHTML='';for(let i=0;i<LONG_BREAK_INTERVAL;i++){const x=document.createElement('div');x.className='dot'+(i<pomInSet?' done':'');d.appendChild(x);}}
+function addTodo(){const inp=document.getElementById('todo-input'),text=inp.value.trim();if(!text)return;todos.push({id:nextId++,text,done:false,pomsEst:1,pomsUsed:0});inp.value='';renderTodos();}
+function toggleDone(id){const t=todos.find(t=>t.id===id);if(t){t.done=!t.done;if(t.done&&activeTaskId===id)setActive(null);renderTodos();}}
+function deleteTodo(id){todos=todos.filter(t=>t.id!==id);if(activeTaskId===id)setActive(null);renderTodos();}
+function setActive(id){
+  activeTaskId=id;
+  const bar=document.getElementById('active-bar');
+  if(id===null){bar.innerHTML='Keine Aufgabe ausgewählt';}
+  else{const t=todos.find(t=>t.id===id);bar.innerHTML=t?'Aktuelle Aufgabe: <span>'+esc(t.text)+'</span>':'Keine Aufgabe ausgewählt';}
   renderTodos();
 }
-
-function toggleDone(id) {
-  const t = todos.find(t=>t.id===id);
-  if (t) { t.done = !t.done; if (t.done && activeTaskId===id) setActive(null); renderTodos(); }
-}
-
-function deleteTodo(id) {
-  todos = todos.filter(t=>t.id!==id);
-  if (activeTaskId===id) setActive(null);
-  renderTodos();
-}
-
-function setActive(id) {
-  activeTaskId = id;
-  const bar = document.getElementById('active-bar');
-  if (id===null) { bar.innerHTML = 'Keine Aufgabe ausgewählt'; }
-  else {
-    const t = todos.find(t=>t.id===id);
-    bar.innerHTML = t ? 'Aktuelle Aufgabe: <span>'+escHtml(t.text)+'</span>' : 'Keine Aufgabe ausgewählt';
-  }
-  renderTodos();
-}
-
-function changeEst(id, delta) {
-  const t = todos.find(t=>t.id===id);
-  if (t) { t.pomsEst = Math.max(1, (t.pomsEst||1)+delta); renderTodos(); }
-}
-
-function clearDone() {
-  todos = todos.filter(t=>!t.done);
-  if (activeTaskId !== null && !todos.find(t=>t.id===activeTaskId)) setActive(null);
-  renderTodos();
-}
-
-function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function renderTodos() {
-  const list = document.getElementById('todo-list');
-  if (todos.length===0) { list.innerHTML='<div style="font-size:13px;color:var(--color-text-secondary);text-align:center;padding:12px 0;">Noch keine Aufgaben – füge eine hinzu!</div>'; return; }
-  list.innerHTML = todos.map(t => {
-    const isActive = t.id===activeTaskId;
-    const dots = Array.from({length: t.pomsEst}, (_,i) =>
-      `<span class="pom-dot${i<t.pomsUsed?' filled':''}"></span>`).join('');
-    return `<div class="todo-item${isActive?' active-task':''}" id="ti-${t.id}">
+function changeEst(id,d){const t=todos.find(t=>t.id===id);if(t){t.pomsEst=Math.max(1,(t.pomsEst||1)+d);renderTodos();}}
+function clearDone(){todos=todos.filter(t=>!t.done);if(activeTaskId!==null&&!todos.find(t=>t.id===activeTaskId))setActive(null);renderTodos();}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function renderTodos(){
+  const list=document.getElementById('todo-list');
+  if(!todos.length){list.innerHTML='<div style="font-size:13px;color:#555;text-align:center;padding:12px 0;">Noch keine Aufgaben – füge eine hinzu!</div>';return;}
+  list.innerHTML=todos.map(t=>{
+    const isActive=t.id===activeTaskId;
+    const dots=Array.from({length:t.pomsEst},(_,i)=>`<span class="pom-dot${i<t.pomsUsed?' filled':''}"></span>`).join('');
+    return `<div class="todo-item${isActive?' active-task':''}">
       <div class="todo-cb${t.done?' checked':''}" onclick="toggleDone(${t.id})" role="checkbox" aria-checked="${t.done}" tabindex="0" onkeydown="if(event.key===' ')toggleDone(${t.id})"></div>
-      <button class="todo-text${t.done?' done':''}" onclick="setActive(${t.id})" style="text-align:left">${escHtml(t.text)}</button>
-      <div class="todo-est" style="gap:3px;align-items:center">
-        <button onclick="changeEst(${t.id},-1)" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:13px;padding:0 2px;line-height:1">−</button>
+      <button class="todo-text${t.done?' done':''}" onclick="setActive(${t.id})">${esc(t.text)}</button>
+      <div class="todo-est">
+        <button onclick="changeEst(${t.id},-1)" style="background:none;border:none;cursor:pointer;color:#666;font-size:13px;padding:0 2px">−</button>
         ${dots}
-        <button onclick="changeEst(${t.id},1)" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:13px;padding:0 2px;line-height:1">+</button>
+        <button onclick="changeEst(${t.id},1)" style="background:none;border:none;cursor:pointer;color:#666;font-size:13px;padding:0 2px">+</button>
       </div>
-      <button class="todo-del" onclick="deleteTodo(${t.id})" aria-label="Löschen"><i class="ti ti-trash" style="font-size:14px" aria-hidden="true"></i></button>
+      <button class="todo-del" onclick="deleteTodo(${t.id})" aria-label="Löschen">🗑</button>
     </div>`;
   }).join('');
 }
-
-ring.style.stroke = MODES[mode].color;
-updateDisplay(); updateRing(); updateDots(); renderTodos();
+ring.style.stroke=MODES[mode].color;
+updateDisplay();updateRing();updateDots();renderTodos();
 </script>
